@@ -1,0 +1,184 @@
+:root {
+    --noir: #0a0a0a;
+    --noir-light: #161616;
+    --gold: #d4af37;
+    --gold-bright: #f9e29c;
+    --text-white: #e5e5e5;
+}
+
+body {
+    background-color: var(--noir);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-white);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.noir-container { width: 100%; max-width: 700px; }
+
+.gold-header { text-align: center; margin-bottom: 50px; }
+.glimmer-text { 
+    font-family: 'Cinzel', serif; 
+    color: var(--gold); 
+    letter-spacing: 5px; 
+    font-size: 2.8rem;
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.gold-line { height: 1px; background: var(--gold); width: 60%; margin: 10px auto; opacity: 0.5; }
+.gold-header p { font-size: 0.8rem; letter-spacing: 3px; color: var(--gold); }
+
+/* Card Styling */
+.noir-card {
+    background: var(--noir-light);
+    border: 1px solid #262626;
+    padding: 30px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.noir-card label {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: var(--gold);
+}
+
+/* Horizontal Options Grid */
+.horizontal-options {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.gold-option input { display: none; }
+
+.gold-option span {
+    display: block;
+    padding: 12px 25px;
+    border: 1px solid #333;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+/* Hover & Selected State */
+.gold-option:hover span { border-color: var(--gold); }
+
+.gold-option input:checked + span {
+    background: var(--gold);
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    border-color: var(--gold);
+}
+
+/* Premium Button */
+.gold-btn {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: 1s;
+    margin-top: 20px;
+}
+
+.gold-btn:hover {
+    background: var(--gold);
+    color: black;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+/* Result Modal */
+.gold-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex; justify-content: center; align-items: center;
+}
+
+.modal-content {
+    border: 1px solid var(--gold);
+    padding: 50px;
+    background: var(--noir);
+    text-align: center;
+}
+
+.pos { color: #ff4d4d; text-shadow: 0 0 10px rgba(255, 77, 77, 0.5); }
+.neg { color: #00ff88; text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
+
+.gold-link { text-decoration: none; color: var(--gold); font-size: 0.8rem; margin-top: 20px; display: block; border-top: 1px solid #333; padding-top: 10px;}
+/* Specialist Alert Box */
+.specialist-alert {
+    background: rgba(212, 175, 55, 0.05); /* Very faint gold tint */
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 25px 0;
+    display: flex;
+    gap: 15px;
+    text-align: left;
+    animation: fadeIn 0.8s ease;
+}
+
+.alert-icon {
+    background: var(--gold);
+    color: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.alert-body h4 {
+    margin: 0;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.alert-body p {
+    font-size: 0.75rem;
+    color: #bbb;
+    margin: 8px 0 15px 0;
+    line-height: 1.4;
+}
+
+.find-doc-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.find-doc-btn:hover {
+    background: var(--gold);
+    color: black;
+}
+
+/* Modal Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

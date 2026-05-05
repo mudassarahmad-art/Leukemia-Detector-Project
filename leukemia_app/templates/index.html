@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HemaScan | Noir Edition</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="noir-container">
+
+    <!-- HEADER -->
+    <header class="gold-header">
+        <h1 class="glimmer-text">LEUKEMIA DETECTOR</h1>
+        <div class="gold-line"></div>
+        <p>LEUKEMIA ANALYSIS SYSTEM</p>
+    </header>
+
+    <!-- FORM -->
+    <form action="/predict" method="POST" class="noir-form">
+
+        <!-- WBC -->
+        <div class="noir-card">
+            <label>
+                WHITE BLOOD CELL COUNT<br>
+                <small>(Normal: 4,500 – 11,000 /µL)</small>
+            </label>
+            <div class="horizontal-options">
+                <label class="gold-option">
+                    <input type="radio" name="wbc" value="3000" required>
+                    <span>LOW</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="wbc" value="7500">
+                    <span>NORMAL</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="wbc" value="30000">
+                    <span>HIGH</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- RBC -->
+        <div class="noir-card">
+            <label>
+                RED BLOOD CELL COUNT<br>
+                <small>(Normal: 3.5 – 5.5 million /µL)</small>
+            </label>
+            <div class="horizontal-options">
+                <label class="gold-option">
+                    <input type="radio" name="rbc" value="3.5" required>
+                    <span>LOW</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="rbc" value="5.0">
+                    <span>NORMAL</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="rbc" value="7.5">
+                    <span>HIGH</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- HB -->
+        <div class="noir-card">
+            <label>
+                HEMOGLOBIN<br>
+                <small>(Normal: 12 – 16 g/dL)</small>
+            </label>
+            <div class="horizontal-options">
+                <label class="gold-option">
+                    <input type="radio" name="hb" value="8" required>
+                    <span>LOW</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="hb" value="14">
+                    <span>NORMAL</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="hb" value="19">
+                    <span>HIGH</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Platelets -->
+        <div class="noir-card">
+            <label>
+                PLATELETS<br>
+                <small>(Normal: 150,000 – 450,000 /µL)</small>
+            </label>
+            <div class="horizontal-options">
+                <label class="gold-option">
+                    <input type="radio" name="platelets" value="100000" required>
+                    <span>LOW</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="platelets" value="250000">
+                    <span>NORMAL</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="platelets" value="550000">
+                    <span>HIGH</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- AGE -->
+        <div class="noir-card">
+            <label>
+                AGE GROUP<br>
+                <small>(Child: 0–12 | Adult: 13–64 | Senior: 65+)</small>
+            </label>
+
+            <div class="horizontal-options">
+                <label class="gold-option">
+                    <input type="radio" name="age_group" value="child" required>
+                    <span>CHILD</span>
+                </label>
+
+                <label class="gold-option">
+                    <input type="radio" name="age_group" value="adult">
+                    <span>ADULT</span>
+                </label>
+
+                <label class="gold-option">
+                    <input type="radio" name="age_group" value="senior">
+                    <span>SENIOR</span>
+                </label>
+            </div>
+
+            <!-- Hidden numeric age -->
+            <input type="hidden" name="age" id="age">
+        </div>
+
+        <!-- BMI -->
+        <div class="noir-card">
+            <label>
+                BMI<br>
+                <small>(Normal: 18.5 – 24.9)</small>
+            </label>
+            <div class="horizontal-options">
+                <label class="gold-option">
+                    <input type="radio" name="bmi" value="17" required>
+                    <span>UNDER</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="bmi" value="22">
+                    <span>IDEAL</span>
+                </label>
+                <label class="gold-option">
+                    <input type="radio" name="bmi" value="32">
+                    <span>OVER</span>
+                </label>
+            </div>
+        </div>
+
+        <button type="submit" class="gold-btn">EXECUTE DIAGNOSTIC ANALYSIS</button>
+
+    </form>
+
+</div>
+
+<!-- RESULT MODAL -->
+{% if prediction_text %}
+<div class="gold-modal">
+    <div class="modal-content">
+
+        <h3 class="report-title">DIAGNOSTIC REPORT</h3>
+
+        <h2 class="{{ 'pos' if 'Positive' in prediction_text else 'neg' }}">
+            {{ prediction_text }}
+        </h2>
+
+        {% if 'Positive' in prediction_text %}
+        <div class="specialist-alert">
+            <div class="alert-icon">!</div>
+            <div class="alert-body">
+                <h4>CONSULT A HEMATOLOGIST</h4>
+                <p>Abnormal blood pattern detected. Please consult a specialist.</p>
+
+                <a href="https://www.google.com/search?q=hematologist+near+me"
+                   target="_blank"
+                   class="find-doc-btn">
+                   FIND NEARBY DOCTOR
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="gold-line"></div>
+        <a href="/" class="gold-link">PERFORM NEW SCAN</a>
+
+    </div>
+</div>
+{% endif %}
+
+<!-- AGE CONVERSION SCRIPT -->
+<script>
+document.querySelector("form").addEventListener("submit", function() {
+    let selected = document.querySelector('input[name="age_group"]:checked');
+    let ageField = document.getElementById("age");
+
+    if (selected.value === "child") {
+        ageField.value = 8;
+    } else if (selected.value === "adult") {
+        ageField.value = 30;
+    } else {
+        ageField.value = 70;
+    }
+});
+</script>
+
+</body>
+</html>
