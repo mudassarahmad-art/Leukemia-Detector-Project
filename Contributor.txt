@@ -1,0 +1,5 @@
+Name: Muhammad Abdullah
+Roll no: SU92-BSDSM-S25-016
+Section: 3A
+Project for : Intro to Data Science 
+My contribution in Project : Data preprocessing, Smote..
